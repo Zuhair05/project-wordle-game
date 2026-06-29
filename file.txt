@@ -1,0 +1,158 @@
+WORDLE GAME
+
+=========================
+PSEUDOCODE
+=========================
+
+GAME OVERVIEW
+
+The player has six attempts to guess a hidden five-letter word.
+After each guess, each letter changes color:
+
+Green = correct letter in the correct position.
+Yellow = correct letter in the wrong position.
+Gray = letter is not in the word.
+
+The player wins if they guess the word before using all six attempts.
+
+--------------------------------------------------
+
+VARIABLES
+
+secretWord
+currentGuess
+currentRow
+currentCol
+gameOver
+
+--------------------------------------------------
+
+DATA STRUCTURES
+
+Array of possible words
+
+words = [
+    "APPLE",
+    "HOUSE",
+    "PLANT",
+    "SMILE",
+    "LIGHT"
+]
+
+Array of guesses
+
+guesses = []
+
+Array of keyboard letters
+
+keyboardLetters = [
+    "Q","W","E","R","T","Y","U","I","O","P",
+    "A","S","D","F","G","H","J","K","L",
+    "Z","X","C","V","B","N","M"
+]
+
+Game board
+
+6 rows
+5 columns
+
+--------------------------------------------------
+
+FUNCTIONS
+
+init()
+
+Choose a random secret word.
+Reset all variables.
+Create the game board.
+Create the keyboard.
+
+--------------------------------
+
+handleKeyPress(letter)
+
+If game is over
+    stop
+
+If current guess has fewer than five letters
+    add letter to current guess
+    display letter on board
+
+--------------------------------
+
+deleteLetter()
+
+Remove the last letter from the current guess.
+
+--------------------------------
+
+submitGuess()
+
+If guess has fewer than five letters
+    show message
+    return
+
+If guess is not a valid word
+    show message
+    return
+
+Check each letter.
+
+If letter is correct and in correct position
+    color green
+
+Else if letter exists elsewhere
+    color yellow
+
+Else
+    color gray
+
+Update keyboard colors.
+
+Save guess.
+
+If guess equals secret word
+    player wins
+
+Else if player used six guesses
+    player loses
+
+Else
+    move to next row
+
+--------------------------------
+
+checkWin()
+
+If current guess equals secret word
+    display "You Win!"
+    gameOver = true
+
+--------------------------------
+
+checkLose()
+
+If currentRow equals 6
+    display "Game Over"
+    reveal secret word
+    gameOver = true
+
+--------------------------------
+
+restartGame()
+
+Clear board.
+Reset keyboard.
+Choose a new random word.
+Start game again.
+
+--------------------------------------------------
+
+USER STORIES
+
+As a player, I want to play a game where I try to guess a hidden five-letter word within six attempts. I want to type letters using my keyboard,
+remove letters if I make a mistake, and submit my guess when I am ready. After each guess, 
+I want the game to give me feedback by changing the colors of the letters to show whether they are correct, in the wrong position,
+or not in the word at all. I also want the on-screen keyboard to update with these colors so I can keep track of the letters I have used.
+I want to know immediately when I have guessed the word correctly and won the game, and if I use all six attempts without guessing the word,
+I want the game to tell me the correct answer. Finally, I want the option to restart the game and play again with a new hidden word.
