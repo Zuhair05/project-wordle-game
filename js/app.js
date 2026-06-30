@@ -25,13 +25,15 @@ let hasFlipped = false;
 const boardEl = document.querySelector(".board");
 const resetBtn = document.querySelector("#reset");
 const errorCountEl = document.querySelector("#error-count");
-const messageEl = document.querySelector(".title");
+const messageEl = document.querySelector(".message");
 const cards = document.querySelectorAll(".card");
 
 
 
 
+
 // console.log(cards)
+
 cardList.sort(function(){
         return 0.5 - Math.random()
     })
@@ -65,11 +67,10 @@ cardList.sort(function(){
     })
     
     function initialize() {
-        cardList.sort(function(){
-            return 0.5 - Math.random()
-            resetBoard();
-        })
-   
+       cardList.sort(function(){
+        return 0.5 - Math.random()
+    })
+   resetBoard();
 
 }
 
@@ -102,9 +103,8 @@ function checkMatch() {
 
         if (winner === cardList.length/2) {
             messageEl.textContent = "You Win!";
-            setTimeout(resetGame,1000);
-            cards.forEach( card => card.classList.remove("visible"));
-
+            messageEl.classList.add("win");
+            setTimeout(resetGame, 2000);
         }
 
         resetBoard();
@@ -121,8 +121,9 @@ function checkMatch() {
 
             if (errorCount >= loser) {
                 messageEl.textContent = "You Lose!";
-                setTimeout(resetGame,1000)
-                cards.forEach(card => card.classList.remove("visible"));
+                messageEl.classList.add("lose");
+                setTimeout(resetGame, 2000);
+                     
             }
 
             resetBoard();
@@ -135,14 +136,19 @@ function checkMatch() {
 function resetGame(){
     errorCount = 0;
     winner = 0;
-    errorCountEl.textContent = 0;
-    messageEl.textContent = "error count: 0";
+    errorCountEl.textContent = errorCount;
+    messageEl.textContent = "";
+    cards.forEach(card => card.classList.remove("visible"));
+
+   
     initialize();
 }
 
 function resetBoard() {
     firstCard = null;
     secondCard = null;
+   
+
     
    
 }
@@ -151,8 +157,11 @@ resetBtn.addEventListener("click", () => {
     errorCount = 0;
     winner = 0;
     cards.forEach(card => card.classList.remove("visible"));
-
-    errorCountEl.textContent =errorCount ;
+    
+    errorCountEl.textContent =  errorCount;
+    messageEl.textContent = "";
+    
+    
     initialize();
 });
 
