@@ -36,13 +36,30 @@ function shuffle() {
 
 function initialize() {
 
-  
+    shuffle();
+    resetBoard();
+
+    const cards = document.querySelectorAll(".card");
+
+    for (let i = 0 ; i < cards.length; i++){
+        let card = cards[i]
+    
+
+      let img = document.createElement("img")
+      img.src=cardSet[i]
+      img.classList.add("card-image");
+      card.appendChild(img)
+
+      card.addEventListener("click", flipCard)
+
+    }
 }
 
 
 
 function flipCard() {
     
+
 
 }
 
