@@ -14,10 +14,10 @@ const cardList = [
     "image/vue.svg",
 ];
 
-let errorCount = 0;
+let errorCount = 6;
 let cardSet;
 let winner = 0;
-let loser = 6;
+let loser = 0;
 let firstCard = null;
 let secondCard = null;
 let hasFlipped = false;
@@ -27,6 +27,7 @@ const resetBtn = document.querySelector("#reset");
 const errorCountEl = document.querySelector("#error-count");
 const messageEl = document.querySelector(".message");
 const cards = document.querySelectorAll(".card");
+
 
 
 
@@ -70,7 +71,14 @@ cardList.sort(function(){
        cardList.sort(function(){
         return 0.5 - Math.random()
     })
-   resetBoard();
+    
+    for (let i = 0; i < cards.length; i++) {
+        const card = cards[i];
+        const img = card.querySelector(".card-image");
+        img.src = cardList[i];
+    }
+    
+    resetBoard();
 
 }
 
@@ -116,10 +124,10 @@ function checkMatch() {
             firstCard.classList.remove("visible");
             secondCard.classList.remove("visible");
 
-            errorCount++;
+            errorCount--;
             errorCountEl.textContent = errorCount;
 
-            if (errorCount >= loser) {
+            if (errorCount == loser) {
                 messageEl.textContent = "You Lose!";
                 messageEl.classList.add("lose");
                 setTimeout(resetGame, 2000);
@@ -134,14 +142,13 @@ function checkMatch() {
 }
 
 function resetGame(){
-    errorCount = 0;
-    winner = 0;
-    errorCountEl.textContent = errorCount;
-    messageEl.textContent = "";
-    cards.forEach(card => card.classList.remove("visible"));
+    // errorCount = 0;
+    // winner = 0;
+    // errorCountEl.textContent = errorCount;
+    
 
    
-    initialize();
+    // initialize();
 }
 
 function resetBoard() {
@@ -154,7 +161,7 @@ function resetBoard() {
 }
 
 resetBtn.addEventListener("click", () => {
-    errorCount = 0;
+    errorCount = 6;
     winner = 0;
     cards.forEach(card => card.classList.remove("visible"));
     
@@ -165,4 +172,9 @@ resetBtn.addEventListener("click", () => {
     initialize();
 });
 
+const lightBtn = document.querySelector("#light");
+lightBtn.addEventListener("click", () => {
+    lightBtn.classList.add("dark-mode");
+    lightBtn.style.backgroundColor = "#080808";
+});
 initialize();

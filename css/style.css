@@ -14,8 +14,16 @@ h1 {
     color: #1d3557;
     letter-spacing: 1px;
 }
+
 .error{
+    font-family: 'Courier New', Courier, monospace;
     color: red;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+.num-attempts{
+    font-family: 'Courier New', Courier, monospace;
+    color: green;
     font-size: 1.2rem;
     margin-top: 10px;
 }
@@ -49,7 +57,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    /* font-size: 2rem; */
     border-radius: 5px;
     cursor: pointer;
 }
@@ -66,7 +74,7 @@ button{
 }
 .controls {
     width: 430px;        
-    margin: 10px auto 0;
+    margin: 10px auto ;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,7 +90,6 @@ button{
 }
 .card.visible .card-image {
   visibility: visible;
- 
-
 }
+
 
