@@ -13,7 +13,9 @@ const cardList = [
     "image/react.svg",
     "image/vue.svg",
 ];
-
+const winSound = new Audio("audio/correct-horn.mp3");
+const youWinSound = new Audio("audio/you win.mp3");
+const loseSound = new Audio("audio/youLose.mp3");
 let errorCount = 6;
 let cardSet;
 let winner = 0;
@@ -27,6 +29,7 @@ const resetBtn = document.querySelector("#reset");
 const errorCountEl = document.querySelector("#error-count");
 const messageEl = document.querySelector(".message");
 const cards = document.querySelectorAll(".card");
+// const messageEndEl = document.querySelector("#message-end");
 
 
 
@@ -106,11 +109,13 @@ function checkMatch() {
     let secondImg = secondCard.querySelector(".card-image").src;
 
     if (firstImg === secondImg) {
+        winSound.play();
 
         winner++;
 
         if (winner === cardList.length/2) {
             messageEl.textContent = "You Win!";
+            youWinSound.play();
             messageEl.classList.add("win");
             setTimeout(resetGame, 2000);
         }
@@ -128,6 +133,7 @@ function checkMatch() {
             errorCountEl.textContent = errorCount;
 
             if (errorCount == loser) {
+                loseSound.play();
                 messageEl.textContent = "You Lose!";
                 messageEl.classList.add("lose");
                 setTimeout(resetGame, 2000);
@@ -172,9 +178,9 @@ resetBtn.addEventListener("click", () => {
     initialize();
 });
 
-const lightBtn = document.querySelector("#light");
-lightBtn.addEventListener("click", () => {
-    lightBtn.classList.add("dark-mode");
-    lightBtn.style.backgroundColor = "#080808";
-});
+// playAgainBtn.addEventListener("click", () => {
+//     errorCount = 6;
+//     winner = 0;
+//     cards.forEach(card => card.classList.remove("visible"));
+// })
 initialize();

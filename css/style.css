@@ -91,5 +91,13 @@ button{
 .card.visible .card-image {
   visibility: visible;
 }
+#message-end {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    border: 2px solid #000;
+    padding: 20px;
+}
+
 
 
