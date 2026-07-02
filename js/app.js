@@ -13,9 +13,6 @@ const cardList = [
     "image/react.svg",
     "image/vue.svg",
 ];
-const winSound = new Audio("audio/correct-horn.mp3");
-const youWinSound = new Audio("audio/you win.mp3");
-const loseSound = new Audio("audio/youLose.mp3");
 let errorCount = 6;
 let cardSet;
 let winner = 0;
@@ -24,6 +21,9 @@ let firstCard = null;
 let secondCard = null;
 let hasFlipped = false;
 
+const winSound = new Audio("audio/correct-horn.mp3");
+const youWinSound = new Audio("audio/you win.mp3");
+const loseSound = new Audio("audio/youLose.mp3");
 const boardEl = document.querySelector(".board");
 const resetBtn = document.querySelector("#reset");
 const errorCountEl = document.querySelector("#error-count");
@@ -84,7 +84,6 @@ cardList.sort(function(){
     resetBoard();
 
 }
-
 function flipCard(event) {
 
 
@@ -104,6 +103,7 @@ function flipCard(event) {
     checkMatch();
 }
 
+
 function checkMatch() {
     let firstImg = firstCard.querySelector(".card-image").src;
     let secondImg = secondCard.querySelector(".card-image").src;
@@ -117,7 +117,7 @@ function checkMatch() {
             messageEl.textContent = "You Win!";
             youWinSound.play();
             messageEl.classList.add("win");
-            setTimeout(resetGame, 2000);
+            // setTimeout(resetGame, 2000);
         }
 
         resetBoard();
@@ -136,7 +136,7 @@ function checkMatch() {
                 loseSound.play();
                 messageEl.textContent = "You Lose!";
                 messageEl.classList.add("lose");
-                setTimeout(resetGame, 2000);
+                // setTimeout(resetGame, 2000);
                      
             }
 
@@ -160,10 +160,6 @@ function resetGame(){
 function resetBoard() {
     firstCard = null;
     secondCard = null;
-   
-
-    
-   
 }
 
 resetBtn.addEventListener("click", () => {
@@ -178,9 +174,5 @@ resetBtn.addEventListener("click", () => {
     initialize();
 });
 
-// playAgainBtn.addEventListener("click", () => {
-//     errorCount = 6;
-//     winner = 0;
-//     cards.forEach(card => card.classList.remove("visible"));
-// })
+
 initialize();
